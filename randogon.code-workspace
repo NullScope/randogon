@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"Lua.workspace.library": { ".": true },
+		"Lua.diagnostics.enable": false,
+		"files.exclude": {
+			".vscode": true,
+			"*/*.pbt": true,
+			"*.pbt": true,
+			"*.code-workspace": true,
+		},
+	}
+}
