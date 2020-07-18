@@ -2,7 +2,7 @@ Name: "Settings"
 RootId: 17162295412651004597
 Objects {
   Id: 12278635965199251815
-  Name: "UI Settings"
+  Name: "Client Settings"
   Transform {
     Location {
     }
@@ -16,6 +16,7 @@ Objects {
   }
   ParentId: 17162295412651004597
   ChildIds: 6453586336790305965
+  ChildIds: 16523884243151321394
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -23,6 +24,33 @@ Objects {
     Value: "mc:evisibilitysetting:inheritfromparent"
   }
   NetworkContext {
+  }
+}
+Objects {
+  Id: 16523884243151321394
+  Name: "Player Character Settings"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 12278635965199251815
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Script {
+    ScriptAsset {
+      Id: 599852361989553826
+    }
   }
 }
 Objects {
@@ -49,6 +77,59 @@ Objects {
   Script {
     ScriptAsset {
       Id: 17461845345352972812
+    }
+  }
+}
+Objects {
+  Id: 8758867685544737434
+  Name: "Server Settings"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 17162295412651004597
+  ChildIds: 477223127268094098
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  NetworkContext {
+    Type: Server
+  }
+}
+Objects {
+  Id: 477223127268094098
+  Name: "PlayerCharacterSettingsServer"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 8758867685544737434
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Script {
+    ScriptAsset {
+      Id: 698871418944283458
     }
   }
 }

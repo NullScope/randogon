@@ -62,35 +62,117 @@ function PathfindingManagerServer:SetupEvents()
 
 end
 
-function PathfindingManagerServer:MoveToPosition(object, startNode, endNode, speed)
+--- Move an object to target position
+-- If the target position is inside the same grid as the object,
+-- simply do a pathfinding search, if not, do a breadth-first search
+-- to find the path of connected grids then do a pathfind search on
+-- each with the end position as the connected node between grids
+-- @param object Core Object that will be moved
+-- @param position Target position in Vector3
+-- @param speed Units per second this object moves
+-- @param rotationSpeed Angles per second this object rotates
+function PathfindingManagerServer:MoveToPosition(object, position, speed, rotationSpeed)
     if self.moveTasks[object] then
         self.moveTasks[object]:Cancel()
+        -- object:StopMove()
     end
 
     local task = Task.Spawn(function ()
-        local path = self.pathFinder:FindPath(startNode, endNode, DebugPathingLevel)
+        local _, startGrid = self:FindNearestNode(object:GetWorldPosition())
+        local endNode, endGrid = self:FindNearestNode(position)
+        local gridPath = self:FindGridPath(startGrid, endGrid)
 
-        table.remove(path, 1)
+        while #gridPath > 0 do
+            local grid = table.remove(gridPath, 1)
+            local gridStartNode = self:FindNearestNode(object:GetWorldPosition())
+            local path
 
-        while #path > 0 do
-            local currentNode = table.remove(path, 1)
+            if grid == endGrid then
+                path = self.pathFinder:FindPath(gridStartNode, endNode, DebugPathingLevel)
+            else
+                local nextGrid = gridPath[1]
+                local nearestExitNode
+                local nearestEntryNode
+                local nearestDistance
 
-            local correctedNodePosition = Vector3.New(currentNode.worldPosition)
-            correctedNodePosition.z = object:GetWorldPosition().z
+                for _, connectedNode in ipairs(grid.neighbors[nextGrid.id].connectedNodes) do
+                    local distance = Vector3.New(connectedNode.neighborNode.worldPosition - endNode.worldPosition).sizeSquared
 
-            local distance = Vector3.New(correctedNodePosition - object:GetWorldPosition())
+                    if not nearestExitNode or distance < nearestDistance then
+                        nearestExitNode = connectedNode.node
+                        nearestEntryNode = connectedNode.neighborNode
+                        nearestDistance = distance
+                    end
+                end
 
-            object:SetWorldRotation(Rotation.New(distance:GetNormalized(), Vector3.UP))
-            object:MoveTo(correctedNodePosition, distance.size / speed)
-
-            while (object:GetWorldPosition() - correctedNodePosition).size > 10 do
-                Task.Wait()
+                path = self.pathFinder:FindPath(gridStartNode, nearestExitNode, DebugPathingLevel)
+                table.insert(path, nearestEntryNode)
             end
+
+            table.remove(path, 1)
+
+            while #path > 0 do
+                local currentNode = table.remove(path, 1)
+                local correctedNodePosition = Vector3.New(currentNode.worldPosition)
+                correctedNodePosition.z = object:GetWorldPosition().z
+
+                local distance = Vector3.New(correctedNodePosition - object:GetWorldPosition())
+                local rotation = Rotation.New(distance:GetNormalized(), Vector3.UP)
+
+                object:RotateTo(rotation, rotationSpeed)
+                object:MoveContinuous(distance:GetNormalized() * speed)
+
+                while Vector3.New(object:GetWorldPosition() - correctedNodePosition).sizeSquared > 25 do
+                    Task.Wait()
+                end
+            end
+
+            object:StopMove()
         end
     end)
 
     self.moveTasks[object] = task
 end
+
+--- Find the path between two grids
+-- It uses breadth first search to find the best path between two grids
+-- @param startGrid The starting grid, see @{grid}
+-- @param endGrid The target grid, see @{grid}
+-- @return Table with the path from startGrid to endGrid
+-- @return Empty table if no path found
+function PathfindingManagerServer:FindGridPath(startGrid, endGrid)
+    local queue = {}
+    local visited = {}
+
+    table.insert(queue, { startGrid })
+
+    while #queue > 0 do
+        local currentPath = table.remove(queue, 1)
+        local currentGrid = currentPath[#currentPath]
+
+        if currentGrid == endGrid then
+            return currentPath
+        end
+
+        for key, neighbor in pairs(currentGrid.neighbors) do
+            if not visited[neighbor.grid] then
+                local newPath = {}
+                for k,v in pairs(currentPath) do
+                    newPath[k] = v
+                end
+
+                table.insert(newPath, neighbor.grid)
+                table.insert(queue, newPath)
+            end
+        end
+
+        visited[currentGrid] = true
+    end
+
+    return { }
+end
+
+
 
 --- Adds the grid to the overall grid map
 -- For each edge node of the grid, look at all other grids
@@ -103,65 +185,67 @@ end
 -- @param grid 2D Table composed of grid nodes, see @{node}
 -- @param nodeDimension Dimension of all the nodes of this grid in Vector3
 function PathfindingManagerServer:AddGrid(id, name, grid, nodeDimension)
-    local edgeNodes = self:GetEdgeNodes(grid)
-    local neighbors = {}
-    local dimension
-    local centerPoint
-    local maxPoint
-    local minPoint
+    local newGrid = {
+        id = id,
+        name = name,
+        grid = grid,
+        edgeNodes = self:GetEdgeNodes(grid),
+        nodeDimension = nodeDimension,
+        neighbors = {}
+    }
 
-    for _, node in ipairs(edgeNodes) do
-        if not maxPoint then
-            maxPoint = Vector3.New(node.worldPosition)
+    for _, node in ipairs(newGrid.edgeNodes) do
+        if not newGrid.maxPoint then
+            newGrid.maxPoint = Vector3.New(node.worldPosition)
         else
-            if maxPoint.x < node.worldPosition.x then
-                maxPoint.x = node.worldPosition.x
+            if newGrid.maxPoint.x < node.worldPosition.x then
+                newGrid.maxPoint.x = node.worldPosition.x
             end
 
-            if maxPoint.y < node.worldPosition.y then
-                maxPoint.y = node.worldPosition.y
+            if newGrid.maxPoint.y < node.worldPosition.y then
+                newGrid.maxPoint.y = node.worldPosition.y
             end
         end
 
-        if not minPoint then
-            minPoint = Vector3.New(node.worldPosition)
+        if not newGrid.minPoint then
+            newGrid.minPoint = Vector3.New(node.worldPosition)
         else
-            if minPoint.x > node.worldPosition.x then
-                minPoint.x = node.worldPosition.x
+            if newGrid.minPoint.x > node.worldPosition.x then
+                newGrid.minPoint.x = node.worldPosition.x
             end
 
-            if minPoint.y > node.worldPosition.y then
-                minPoint.y = node.worldPosition.y
+            if newGrid.minPoint.y > node.worldPosition.y then
+                newGrid.minPoint.y = node.worldPosition.y
             end
         end
 
         for _, neighborGrid in pairs(self.grids) do
-            local neighborEdgeNodes = self:GetEdgeNodes(neighborGrid.grid)
+            local neighborEdgeNodes = neighborGrid.edgeNodes
             local nodeSize = nodeDimension.x > neighborGrid.nodeDimension.x and nodeDimension.x or neighborGrid.nodeDimension.x
 
             for _, neighborNode in ipairs(neighborEdgeNodes) do
-                local distance = math.floor((node.worldPosition - neighborNode.worldPosition).size)
+                local distance = math.floor((node.worldPosition - neighborNode.worldPosition).sizeSquared)
 
                 if distance <= nodeSize then
 
                     -- Create a new neighbor if it doesn't exist
                     -- with the grid neighbor grid
-                    if not neighbors[neighborGrid.id] then
-                        neighbors[neighborGrid.id] = {
+                    if not newGrid.neighbors[neighborGrid.id] then
+                        newGrid.neighbors[neighborGrid.id] = {
                             grid = neighborGrid,
                             connectedNodes = {}
                         }
                     end
 
                     -- Update the neighbor connected nodes of this grid
-                    table.insert(neighbors[neighborGrid.id].connectedNodes, {
+                    table.insert(newGrid.neighbors[neighborGrid.id].connectedNodes, {
                         node = node,
                         neighborNode = neighborNode
                     })
 
                     if not neighborGrid.neighbors[id] then
                         neighborGrid.neighbors[id] = {
-                            grid = grid,
+                            grid = newGrid,
                             connectedNodes = {}
                         }
                     end
@@ -176,8 +260,8 @@ function PathfindingManagerServer:AddGrid(id, name, grid, nodeDimension)
         end
     end
 
-    dimension = (maxPoint - minPoint) + nodeDimension
-    centerPoint = maxPoint - (dimension / 2)
+    newGrid.dimension = (newGrid.maxPoint - newGrid.minPoint) + nodeDimension
+    newGrid.centerPoint = newGrid.maxPoint - (newGrid.dimension / 2)
 
     if DebugWalkable then
         for x, column in ipairs(grid) do
@@ -190,7 +274,7 @@ function PathfindingManagerServer:AddGrid(id, name, grid, nodeDimension)
     end
 
     if DebugConnections then
-        for _, neighbor in pairs(neighbors) do
+        for _, neighbor in pairs(newGrid.neighbors) do
             for _, connectedNode in ipairs(neighbor.connectedNodes) do
                 self:DebugDrawNode(connectedNode.node.worldPosition, nodeDimension / 2, Color.MAGENTA, 2)
                 self:DebugDrawNode(connectedNode.neighborNode.worldPosition, nodeDimension / 2, Color.ORANGE, 2)
@@ -199,24 +283,13 @@ function PathfindingManagerServer:AddGrid(id, name, grid, nodeDimension)
     end
 
     if DebugExtremities then
-        self:DebugDrawNode(minPoint, nodeDimension / 2, Color.CYAN, 3)
-        self:DebugDrawNode(maxPoint, nodeDimension / 2, Color.CYAN, 3)
-        self:DebugDrawNode(centerPoint, nodeDimension / 2, Color.CYAN, 3)
-        self:DebugDrawNode(centerPoint + nodeDimension / 2, dimension / 2, Color.YELLOW, 3)
+        self:DebugDrawNode(newGrid.minPoint, nodeDimension / 2, Color.CYAN, 3)
+        self:DebugDrawNode(newGrid.maxPoint, nodeDimension / 2, Color.CYAN, 3)
+        self:DebugDrawNode(newGrid.centerPoint, nodeDimension / 2, Color.CYAN, 3)
+        self:DebugDrawNode(newGrid.centerPoint + nodeDimension / 2, newGrid.dimension / 2, Color.YELLOW, 3)
     end
 
-    self.grids[id] = {
-        id = id,
-        name = name,
-        grid = grid,
-        maxPoint = maxPoint,
-        centerPoint = centerPoint,
-        minPoint = minPoint,
-        dimension = dimension,
-        nodeDimension = nodeDimension,
-        neighbors = neighbors,
-        edgeNodes = edgeNodes
-    }
+    self.grids[id] = newGrid
 end
 
 --- Get the edge nodes of the grid
@@ -260,7 +333,7 @@ function PathfindingManagerServer:FindNearestNode(position)
 
     for _, grid in pairs(self.grids) do
         for _, node in ipairs(grid.edgeNodes) do
-            local distance = Vector3.New(node.worldPosition - position).size
+            local distance = Vector3.New(node.worldPosition - position).sizeSquared
 
             if not nearestEdgeNode or distance < shortestEdgeNodeDistance then
                 nearestGrid = grid
@@ -273,13 +346,13 @@ function PathfindingManagerServer:FindNearestNode(position)
     if nearestGrid then
         local nearestNode
         local shortestNodeDistance
-        local distanceFromCenterPoint = Vector3.New(nearestGrid.centerPoint - position).size
+        local distanceFromCenterPoint = Vector3.New(nearestGrid.centerPoint - position).sizeSquared
 
         -- If the position is inside the grid
-        if distanceFromCenterPoint <= nearestGrid.dimension.size / 2 then
+        if distanceFromCenterPoint <= nearestGrid.dimension.sizeSquared / 2 then
             for x, row in ipairs(nearestGrid.grid) do
                 for y, node in ipairs(row) do
-                    local distance = Vector3.New(node.worldPosition - position).size
+                    local distance = Vector3.New(node.worldPosition - position).sizeSquared
 
                     if not nearestNode or distance < shortestNodeDistance then
                         nearestNode = node
@@ -288,8 +361,8 @@ function PathfindingManagerServer:FindNearestNode(position)
                 end
             end
         else
-            for _, node in ipairs(nearestGrid.grid.edgeNodes) do
-                local distance = Vector3.New(node.worldPosition - position).size
+            for _, node in ipairs(nearestGrid.edgeNodes) do
+                local distance = Vector3.New(node.worldPosition - position).sizeSquared
 
                 if not nearestNode or distance < shortestNodeDistance then
                     nearestNode = node
@@ -309,12 +382,19 @@ end
 -- @param dimension Dimension of the box in Vector3
 -- @param color The color of the box in Color
 -- @param zOffset Offset of the position Z axis (default 1)
-function PathfindingManagerServer:DebugDrawNode(position, dimension, color, zOffset)
+function PathfindingManagerServer:DebugDrawNode(position, dimension, color, zOffset, duration)
     zOffset = zOffset or 1
+    duration = duration or 9007199254740992
+
+    dimension = Vector3.New(dimension)
+    position = Vector3.New(position)
+
+    position.z = position.z - dimension.z
+    dimension.z = 0
 
     CoreDebug.DrawBox(position + Vector3.New(0, 0, zOffset), dimension, {
         color = color,
-        duration = 9007199254740992
+        duration = duration
     })
 end
 

@@ -1,7 +1,7 @@
 Name: "1x2 Hallway_12"
-RootId: 10537655423135619715
+RootId: 14378597626638165780
 Objects {
-  Id: 7274618497106747522
+  Id: 3215402618853551379
   Name: "Grid"
   Transform {
     Location {
@@ -14,28 +14,36 @@ Objects {
       Z: 1
     }
   }
-  ParentId: 10537655423135619715
-  ChildIds: 3792552581559342759
-  ChildIds: 9162320261641486657
-  ChildIds: 3196012941009070019
+  ParentId: 14378597626638165780
+  ChildIds: 5789790994014749160
+  ChildIds: 8997533670770102322
+  ChildIds: 1103250990321870624
   UnregisteredParameters {
+    Overrides {
+      Name: "cs:Debug"
+      Bool: false
+    }
     Overrides {
       Name: "cs:Root"
       ObjectReference {
-        SelfId: 10537655423135619715
+        SelfId: 14378597626638165780
       }
     }
     Overrides {
       Name: "cs:GridTrigger"
       ObjectReference {
-        SelfId: 9162320261641486657
+        SelfId: 8997533670770102322
       }
     }
     Overrides {
       Name: "cs:GridNode"
       ObjectReference {
-        SelfId: 3792552581559342759
+        SelfId: 5789790994014749160
       }
+    }
+    Overrides {
+      Name: "cs:StartEvent"
+      String: "StartGridCreation"
     }
     Overrides {
       Name: "cs:FloorTeam"
@@ -45,11 +53,8 @@ Objects {
       Name: "cs:CollisionTeam"
       Int: 101
     }
-    Overrides {
-      Name: "cs:Debug"
-      Bool: false
-    }
   }
+  WantsNetworking: true
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -61,7 +66,7 @@ Objects {
   }
 }
 Objects {
-  Id: 3196012941009070019
+  Id: 1103250990321870624
   Name: "PathfindingGridCreator"
   Transform {
     Location {
@@ -75,7 +80,7 @@ Objects {
       Z: 1
     }
   }
-  ParentId: 7274618497106747522
+  ParentId: 3215402618853551379
   UnregisteredParameters {
   }
   Collidable_v2 {
@@ -91,7 +96,7 @@ Objects {
   }
 }
 Objects {
-  Id: 9162320261641486657
+  Id: 8997533670770102322
   Name: "GridTrigger"
   Transform {
     Location {
@@ -105,7 +110,7 @@ Objects {
       Z: 1
     }
   }
-  ParentId: 7274618497106747522
+  ParentId: 3215402618853551379
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -123,7 +128,7 @@ Objects {
   }
 }
 Objects {
-  Id: 3792552581559342759
+  Id: 5789790994014749160
   Name: "GridNode"
   Transform {
     Location {
@@ -134,9 +139,10 @@ Objects {
     Scale {
       X: 0.5
       Y: 0.5
+      Z: 0.5
     }
   }
-  ParentId: 7274618497106747522
+  ParentId: 3215402618853551379
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -154,7 +160,7 @@ Objects {
   }
 }
 Objects {
-  Id: 2480600598745649833
+  Id: 3310985282976523335
   Name: "Floor"
   Transform {
     Location {
@@ -167,7 +173,7 @@ Objects {
       Z: 1
     }
   }
-  ParentId: 10537655423135619715
+  ParentId: 14378597626638165780
   UnregisteredParameters {
     Overrides {
       Name: "ma:Shared_BaseMaterial:id"
@@ -176,6 +182,7 @@ Objects {
       }
     }
   }
+  WantsNetworking: true
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -199,7 +206,7 @@ Objects {
   }
 }
 Objects {
-  Id: 8535098641477474241
+  Id: 10332386629326148844
   Name: "Walls"
   Transform {
     Location {
@@ -212,9 +219,10 @@ Objects {
       Z: 1
     }
   }
-  ParentId: 10537655423135619715
-  ChildIds: 3857184172811041673
-  ChildIds: 10084285544529631779
+  ParentId: 14378597626638165780
+  ChildIds: 15368309873914674522
+  ChildIds: 3655801280107926235
+  WantsNetworking: true
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -226,7 +234,7 @@ Objects {
   }
 }
 Objects {
-  Id: 10084285544529631779
+  Id: 3655801280107926235
   Name: "Plane 1m - One Sided"
   Transform {
     Location {
@@ -243,7 +251,7 @@ Objects {
       Z: 1
     }
   }
-  ParentId: 8535098641477474241
+  ParentId: 10332386629326148844
   UnregisteredParameters {
     Overrides {
       Name: "ma:Shared_BaseMaterial:id"
@@ -252,6 +260,7 @@ Objects {
       }
     }
   }
+  WantsNetworking: true
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }
@@ -274,7 +283,7 @@ Objects {
   }
 }
 Objects {
-  Id: 3857184172811041673
+  Id: 15368309873914674522
   Name: "Plane 1m - One Sided"
   Transform {
     Location {
@@ -290,7 +299,7 @@ Objects {
       Z: 1
     }
   }
-  ParentId: 8535098641477474241
+  ParentId: 10332386629326148844
   UnregisteredParameters {
     Overrides {
       Name: "ma:Shared_BaseMaterial:id"
@@ -299,6 +308,7 @@ Objects {
       }
     }
   }
+  WantsNetworking: true
   Collidable_v2 {
     Value: "mc:ecollisionsetting:inheritfromparent"
   }

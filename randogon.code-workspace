@@ -13,5 +13,6 @@
 			"*.pbt": true,
 			"*.code-workspace": true,
 		},
+		"lua.targetVersion": "5.3",
 	}
 }

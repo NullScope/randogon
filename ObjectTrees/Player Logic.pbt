@@ -1,6 +1,32 @@
 Name: "Player Logic"
 RootId: 12071067470470310339
 Objects {
+  Id: 18161481573898411223
+  Name: "Class"
+  Transform {
+    Location {
+    }
+    Rotation {
+    }
+    Scale {
+      X: 1
+      Y: 1
+      Z: 1
+    }
+  }
+  ParentId: 12071067470470310339
+  Collidable_v2 {
+    Value: "mc:ecollisionsetting:inheritfromparent"
+  }
+  Visible_v2 {
+    Value: "mc:evisibilitysetting:inheritfromparent"
+  }
+  Folder {
+    IsFilePartition: true
+    FilePartitionName: "Class"
+  }
+}
+Objects {
   Id: 12418879518548388395
   Name: "Grid Movement"
   Transform {
@@ -108,10 +134,11 @@ Objects {
   Camera {
     UseAsDefault: true
     AttachToLocalPlayer: true
+    InitialDistance: 500
     MinDistance: 300
     MaxDistance: 600
     PositionOffset {
-      X: -1000
+      X: -500
     }
     RotationOffset {
       Pitch: -45
@@ -131,9 +158,6 @@ Objects {
   Name: "Spawn Point"
   Transform {
     Location {
-      X: 50
-      Y: -150
-      Z: 120
     }
     Rotation {
     }

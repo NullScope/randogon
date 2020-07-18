@@ -3,4 +3,4 @@ Name: "UI Settings"
 PlatformAssetType: 3
 TextAsset {
 }
-SerializationVersion: 59
+SerializationVersion: 61

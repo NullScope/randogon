@@ -15,7 +15,7 @@ Assets {
             Z: 1
           }
         }
-        ParentId: 10221497085043854310
+        ParentId: 7402690249273532014
         ChildIds: 5575681341098876232
         ChildIds: 14156644989815917546
         ChildIds: 18142743535388446185
@@ -246,8 +246,6 @@ Assets {
           }
           Vfx {
             AutoPlay: true
-            TeamSettings {
-            }
           }
         }
       }
@@ -316,8 +314,6 @@ Assets {
           }
           Vfx {
             AutoPlay: true
-            TeamSettings {
-            }
           }
         }
       }
@@ -409,8 +405,6 @@ Assets {
           }
           Vfx {
             AutoPlay: true
-            TeamSettings {
-            }
           }
         }
       }
@@ -558,5 +552,5 @@ Assets {
       AssetId: "None"
     }
   }
-  SerializationVersion: 59
+  SerializationVersion: 61
 }

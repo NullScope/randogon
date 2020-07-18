@@ -4,1061 +4,6 @@
     "global": {
         "type": "table",
         "fields": {
-            "CoreDebug": {
-                "type": "table",
-                "fields": {
-                    "DrawLine": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "startPosition"
-                                    },
-                                    {
-                                        "name": "endPosition"
-                                    },
-                                    {
-                                        "name": "parameters"
-                                    }
-                                ]
-                            },
-                            {
-                                "args": [
-                                    {
-                                        "name": "startPosition"
-                                    },
-                                    {
-                                        "name": "endPosition"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "DrawBox": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "centerPosition"
-                                    },
-                                    {
-                                        "name": "scale"
-                                    },
-                                    {
-                                        "name": "parameters"
-                                    }
-                                ]
-                            },
-                            {
-                                "args": [
-                                    {
-                                        "name": "centerPosition"
-                                    },
-                                    {
-                                        "name": "scale"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "DrawSphere": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "centerPosition"
-                                    },
-                                    {
-                                        "name": "radius"
-                                    },
-                                    {
-                                        "name": "parameters"
-                                    }
-                                ]
-                            },
-                            {
-                                "args": [
-                                    {
-                                        "name": "centerPosition"
-                                    },
-                                    {
-                                        "name": "radius"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            "CoreMath": {
-                "type": "table",
-                "fields": {
-                    "Round": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "number"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "x"
-                                    },
-                                    {
-                                        "name": "decimals"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "Lerp": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "number"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "from"
-                                    },
-                                    {
-                                        "name": "to"
-                                    },
-                                    {
-                                        "name": "progress"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "Clamp": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "number"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "x"
-                                    },
-                                    {
-                                        "name": "min"
-                                    },
-                                    {
-                                        "name": "max"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            "CoreString": {
-                "type": "table",
-                "fields": {
-                    "Split": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "string"
-                                    }
-                                ]
-                            },
-                            {
-                                "args": [
-                                    {
-                                        "name": "string"
-                                    },
-                                    {
-                                        "name": "delimiter"
-                                    },
-                                    {
-                                        "name": "optionalParameters"
-                                    }
-                                ]
-                            },
-                            {
-                                "args": [
-                                    {
-                                        "name": "string"
-                                    },
-                                    {
-                                        "name": "optionalParameters"
-                                    }
-                                ]
-                            },
-                            {
-                                "args": [
-                                    {
-                                        "name": "string"
-                                    },
-                                    {
-                                        "name": "delimiter"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "Join": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "delimiter"
-                                    },
-                                    {
-                                        "name": "strings"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "Trim": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "string"
-                                    },
-                                    {
-                                        "name": "trimmedStrings"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            "Events": {
-                "type": "table",
-                "fields": {
-                    "Connect": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_EventListener"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "eventName"
-                                    },
-                                    {
-                                        "name": "listener"
-                                    },
-                                    {
-                                        "name": "additionalParameters"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "ConnectForPlayer": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_EventListener"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "eventName"
-                                    },
-                                    {
-                                        "name": "listener"
-                                    },
-                                    {
-                                        "name": "additionalParameters"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "Broadcast": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "eventName"
-                                    },
-                                    {
-                                        "name": "argumentList"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "BroadcastToServer": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_BroadcastEventResultCode"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "eventName"
-                                    },
-                                    {
-                                        "name": "argumentList"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "BroadcastToAllPlayers": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_BroadcastEventResultCode"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "eventName"
-                                    },
-                                    {
-                                        "name": "argumentList"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "BroadcastToPlayer": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_BroadcastEventResultCode"
-                            },
-                            {
-                                "type": "string"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "player"
-                                    },
-                                    {
-                                        "name": "eventName"
-                                    },
-                                    {
-                                        "name": "argumentList"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            "Game": {
-                "type": "table",
-                "fields": {
-                    "GetLocalPlayer": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_Player"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": []
-                            }
-                        ]
-                    },
-                    "GetPlayers": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "table"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "optionalParams"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "FindPlayersInCylinder": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "table"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "worldPosition"
-                                    },
-                                    {
-                                        "name": "radius"
-                                    },
-                                    {
-                                        "name": "optionalParams"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "FindPlayersInSphere": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "table"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "worldPosition"
-                                    },
-                                    {
-                                        "name": "radius"
-                                    },
-                                    {
-                                        "name": "optionalParams"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "FindNearestPlayer": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_Player"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "worldPosition"
-                                    },
-                                    {
-                                        "name": "optionalParameters"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "StartRound": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": []
-                            }
-                        ]
-                    },
-                    "EndRound": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": []
-                            }
-                        ]
-                    },
-                    "GetTeamScore": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "integer"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "team"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "SetTeamScore": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "team"
-                                    },
-                                    {
-                                        "name": "score"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "IncreaseTeamScore": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "team"
-                                    },
-                                    {
-                                        "name": "scoreChange"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "DecreaseTeamScore": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "team"
-                                    },
-                                    {
-                                        "name": "scoreChange"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "ResetTeamScores": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": []
-                            }
-                        ]
-                    },
-                    "playerJoinedEvent": {
-                        "type": "ref",
-                        "name": "_Event"
-                    },
-                    "playerLeftEvent": {
-                        "type": "ref",
-                        "name": "_Event"
-                    },
-                    "abilitySpawnedEvent": {
-                        "type": "ref",
-                        "name": "_Event"
-                    },
-                    "roundStartEvent": {
-                        "type": "ref",
-                        "name": "_Event"
-                    },
-                    "roundEndEvent": {
-                        "type": "ref",
-                        "name": "_Event"
-                    },
-                    "teamScoreChangedEvent": {
-                        "type": "ref",
-                        "name": "_Event"
-                    }
-                }
-            },
-            "Teams": {
-                "type": "table",
-                "fields": {
-                    "AreTeamsFriendly": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "bool"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "team1"
-                                    },
-                                    {
-                                        "name": "team2"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "AreTeamsEnemies": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "bool"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "team1"
-                                    },
-                                    {
-                                        "name": "team2"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            "UI": {
-                "type": "table",
-                "fields": {
-                    "ShowFlyUpText": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "text"
-                                    },
-                                    {
-                                        "name": "worldPosition"
-                                    },
-                                    {
-                                        "name": "optionalParameters"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "ShowDamageDirection": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "sourceObject"
-                                    }
-                                ]
-                            },
-                            {
-                                "args": [
-                                    {
-                                        "name": "sourcePlayer"
-                                    }
-                                ]
-                            },
-                            {
-                                "args": [
-                                    {
-                                        "name": "sourceWorldPosition"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "GetScreenPosition": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_Vector2"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "worldPosition"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "GetScreenSize": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_Vector2"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": []
-                            }
-                        ]
-                    },
-                    "PrintToScreen": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "message"
-                                    },
-                                    {
-                                        "name": "color"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "GetCursorPosition": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_Vector2"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": []
-                            }
-                        ]
-                    },
-                    "GetCursorHitResult": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_HitResult"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": []
-                            }
-                        ]
-                    },
-                    "GetCursorPlaneIntersection": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_Vector3"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "pointOnPlane"
-                                    },
-                                    {
-                                        "name": "planeNormal"
-                                    }
-                                ]
-                            },
-                            {
-                                "args": [
-                                    {
-                                        "name": "pointOnPlane"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "IsCursorVisible": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "bool"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": []
-                            }
-                        ]
-                    },
-                    "SetCursorVisible": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "visibility"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "IsCursorLockedToViewport": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "bool"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": []
-                            }
-                        ]
-                    },
-                    "SetCursorLockedToViewport": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "isLocked"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "CanCursorInteractWithUI": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "bool"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": []
-                            }
-                        ]
-                    },
-                    "SetCanCursorInteractWithUI": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "canInteract"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "IsReticleVisible": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "bool"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": []
-                            }
-                        ]
-                    },
-                    "SetReticleVisible": {
-                        "type": "function",
-                        "returnTypes": [],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "visibility"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
-            "World": {
-                "type": "table",
-                "fields": {
-                    "GetRootObject": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_CoreObject"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": []
-                            }
-                        ]
-                    },
-                    "FindObjectById": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_CoreObject"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "id"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "FindObjectByName": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_CoreObject"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "name"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "FindObjectsByName": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "table"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "name"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "FindObjectsByType": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "table"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "typeName"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "SpawnAsset": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_CoreObject"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "assetId"
-                                    },
-                                    {
-                                        "name": "optionalParameters"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "Raycast": {
-                        "type": "function",
-                        "returnTypes": [
-                            {
-                                "type": "ref",
-                                "name": "_HitResult"
-                            }
-                        ],
-                        "variants": [
-                            {
-                                "args": [
-                                    {
-                                        "name": "startPosition"
-                                    },
-                                    {
-                                        "name": "endPosition"
-                                    },
-                                    {
-                                        "name": "optionalParameters"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            },
             "AbilityTarget": {
                 "type": "table",
                 "fields": {
@@ -1947,6 +892,1140 @@
                     }
                 }
             },
+            "CoreDebug": {
+                "type": "table",
+                "fields": {
+                    "DrawLine": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "startPosition"
+                                    },
+                                    {
+                                        "name": "endPosition"
+                                    },
+                                    {
+                                        "name": "parameters"
+                                    }
+                                ]
+                            },
+                            {
+                                "args": [
+                                    {
+                                        "name": "startPosition"
+                                    },
+                                    {
+                                        "name": "endPosition"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "DrawBox": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "centerPosition"
+                                    },
+                                    {
+                                        "name": "scale"
+                                    },
+                                    {
+                                        "name": "parameters"
+                                    }
+                                ]
+                            },
+                            {
+                                "args": [
+                                    {
+                                        "name": "centerPosition"
+                                    },
+                                    {
+                                        "name": "scale"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "DrawSphere": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "centerPosition"
+                                    },
+                                    {
+                                        "name": "radius"
+                                    },
+                                    {
+                                        "name": "parameters"
+                                    }
+                                ]
+                            },
+                            {
+                                "args": [
+                                    {
+                                        "name": "centerPosition"
+                                    },
+                                    {
+                                        "name": "radius"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "GetStackTrace": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "GetTaskStackTrace": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": []
+                            },
+                            {
+                                "args": [
+                                    {
+                                        "name": "task"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "CoreMath": {
+                "type": "table",
+                "fields": {
+                    "Round": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "number"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "x"
+                                    },
+                                    {
+                                        "name": "decimals"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "Lerp": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "number"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "from"
+                                    },
+                                    {
+                                        "name": "to"
+                                    },
+                                    {
+                                        "name": "progress"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "Clamp": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "number"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "x"
+                                    },
+                                    {
+                                        "name": "min"
+                                    },
+                                    {
+                                        "name": "max"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "CoreString": {
+                "type": "table",
+                "fields": {
+                    "Split": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "string"
+                                    }
+                                ]
+                            },
+                            {
+                                "args": [
+                                    {
+                                        "name": "string"
+                                    },
+                                    {
+                                        "name": "delimiter"
+                                    },
+                                    {
+                                        "name": "optionalParameters"
+                                    }
+                                ]
+                            },
+                            {
+                                "args": [
+                                    {
+                                        "name": "string"
+                                    },
+                                    {
+                                        "name": "optionalParameters"
+                                    }
+                                ]
+                            },
+                            {
+                                "args": [
+                                    {
+                                        "name": "string"
+                                    },
+                                    {
+                                        "name": "delimiter"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "Join": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "delimiter"
+                                    },
+                                    {
+                                        "name": "strings"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "Trim": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "string"
+                                    },
+                                    {
+                                        "name": "trimmedStrings"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "Events": {
+                "type": "table",
+                "fields": {
+                    "Connect": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_EventListener"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "eventName"
+                                    },
+                                    {
+                                        "name": "listener"
+                                    },
+                                    {
+                                        "name": "additionalParameters"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "ConnectForPlayer": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_EventListener"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "eventName"
+                                    },
+                                    {
+                                        "name": "listener"
+                                    },
+                                    {
+                                        "name": "additionalParameters"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "Broadcast": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "eventName"
+                                    },
+                                    {
+                                        "name": "argumentList"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "BroadcastToServer": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_BroadcastEventResultCode"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "eventName"
+                                    },
+                                    {
+                                        "name": "argumentList"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "BroadcastToAllPlayers": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_BroadcastEventResultCode"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "eventName"
+                                    },
+                                    {
+                                        "name": "argumentList"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "BroadcastToPlayer": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_BroadcastEventResultCode"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "player"
+                                    },
+                                    {
+                                        "name": "eventName"
+                                    },
+                                    {
+                                        "name": "argumentList"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "Game": {
+                "type": "table",
+                "fields": {
+                    "GetLocalPlayer": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_Player"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "GetPlayers": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "table"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "optionalParams"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "FindPlayersInCylinder": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "table"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "worldPosition"
+                                    },
+                                    {
+                                        "name": "radius"
+                                    },
+                                    {
+                                        "name": "optionalParams"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "FindPlayersInSphere": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "table"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "worldPosition"
+                                    },
+                                    {
+                                        "name": "radius"
+                                    },
+                                    {
+                                        "name": "optionalParams"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "FindNearestPlayer": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_Player"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "worldPosition"
+                                    },
+                                    {
+                                        "name": "optionalParameters"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "StartRound": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "EndRound": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "GetTeamScore": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "integer"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "team"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "SetTeamScore": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "team"
+                                    },
+                                    {
+                                        "name": "score"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "IncreaseTeamScore": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "team"
+                                    },
+                                    {
+                                        "name": "scoreChange"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "DecreaseTeamScore": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "team"
+                                    },
+                                    {
+                                        "name": "scoreChange"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "ResetTeamScores": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "playerJoinedEvent": {
+                        "type": "ref",
+                        "name": "_Event"
+                    },
+                    "playerLeftEvent": {
+                        "type": "ref",
+                        "name": "_Event"
+                    },
+                    "abilitySpawnedEvent": {
+                        "type": "ref",
+                        "name": "_Event"
+                    },
+                    "roundStartEvent": {
+                        "type": "ref",
+                        "name": "_Event"
+                    },
+                    "roundEndEvent": {
+                        "type": "ref",
+                        "name": "_Event"
+                    },
+                    "teamScoreChangedEvent": {
+                        "type": "ref",
+                        "name": "_Event"
+                    }
+                }
+            },
+            "Storage": {
+                "type": "table",
+                "fields": {
+                    "GetPlayerData": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "table"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "player"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "SetPlayerData": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_StorageResultCode"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "player"
+                                    },
+                                    {
+                                        "name": "data"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "Teams": {
+                "type": "table",
+                "fields": {
+                    "AreTeamsFriendly": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "bool"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "team1"
+                                    },
+                                    {
+                                        "name": "team2"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "AreTeamsEnemies": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "bool"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "team1"
+                                    },
+                                    {
+                                        "name": "team2"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "UI": {
+                "type": "table",
+                "fields": {
+                    "ShowFlyUpText": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "text"
+                                    },
+                                    {
+                                        "name": "worldPosition"
+                                    },
+                                    {
+                                        "name": "optionalParameters"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "ShowDamageDirection": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "sourceObject"
+                                    }
+                                ]
+                            },
+                            {
+                                "args": [
+                                    {
+                                        "name": "sourcePlayer"
+                                    }
+                                ]
+                            },
+                            {
+                                "args": [
+                                    {
+                                        "name": "sourceWorldPosition"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "GetScreenPosition": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_Vector2"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "worldPosition"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "GetScreenSize": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_Vector2"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "PrintToScreen": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "message"
+                                    },
+                                    {
+                                        "name": "color"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "GetCursorPosition": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_Vector2"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "GetCursorHitResult": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_HitResult"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "GetCursorPlaneIntersection": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_Vector3"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "pointOnPlane"
+                                    },
+                                    {
+                                        "name": "planeNormal"
+                                    }
+                                ]
+                            },
+                            {
+                                "args": [
+                                    {
+                                        "name": "pointOnPlane"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "IsCursorVisible": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "bool"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "SetCursorVisible": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "isVisible"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "IsCursorLockedToViewport": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "bool"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "SetCursorLockedToViewport": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "isLocked"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "CanCursorInteractWithUI": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "bool"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "SetCanCursorInteractWithUI": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "canInteract"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "IsReticleVisible": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "bool"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "SetReticleVisible": {
+                        "type": "function",
+                        "returnTypes": [],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "isVisible"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            "World": {
+                "type": "table",
+                "fields": {
+                    "GetRootObject": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_CoreObject"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": []
+                            }
+                        ]
+                    },
+                    "FindObjectById": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_CoreObject"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "id"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "FindObjectByName": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_CoreObject"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "name"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "FindObjectsByName": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "table"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "name"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "FindObjectsByType": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "table"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "typeName"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "SpawnAsset": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_CoreObject"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "assetId"
+                                    },
+                                    {
+                                        "name": "optionalParameters"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "Raycast": {
+                        "type": "function",
+                        "returnTypes": [
+                            {
+                                "type": "ref",
+                                "name": "_HitResult"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "args": [
+                                    {
+                                        "name": "startPosition"
+                                    },
+                                    {
+                                        "name": "endPosition"
+                                    },
+                                    {
+                                        "name": "optionalParameters"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
             "AbilityFacingMode": {
                 "type": "ref",
                 "name": "_AbilityFacingMode"
@@ -1958,6 +2037,10 @@
             "BroadcastEventResultCode": {
                 "type": "ref",
                 "name": "_BroadcastEventResultCode"
+            },
+            "Collision": {
+                "type": "ref",
+                "name": "_Collision"
             },
             "DamageReason": {
                 "type": "ref",
@@ -1979,6 +2062,14 @@
                 "type": "ref",
                 "name": "_MovementMode"
             },
+            "RotationMode": {
+                "type": "ref",
+                "name": "_RotationMode"
+            },
+            "StorageResultCode": {
+                "type": "ref",
+                "name": "_StorageResultCode"
+            },
             "TaskStatus": {
                 "type": "ref",
                 "name": "_TaskStatus"
@@ -1986,6 +2077,10 @@
             "TextJustify": {
                 "type": "ref",
                 "name": "_TextJustify"
+            },
+            "Visibility": {
+                "type": "ref",
+                "name": "_Visibility"
             },
             "_Ability": {
                 "type": "ref",
@@ -1998,6 +2093,10 @@
             "_AbilityTarget": {
                 "type": "ref",
                 "name": "_AbilityTarget"
+            },
+            "_AnimatedMesh": {
+                "type": "ref",
+                "name": "_AnimatedMesh"
             },
             "_AreaLight": {
                 "type": "ref",
@@ -2014,6 +2113,10 @@
             "_Color": {
                 "type": "ref",
                 "name": "_Color"
+            },
+            "_CoreMesh": {
+                "type": "ref",
+                "name": "_CoreMesh"
             },
             "_CoreObject": {
                 "type": "ref",
@@ -2050,6 +2153,10 @@
             "_HitResult": {
                 "type": "ref",
                 "name": "_HitResult"
+            },
+            "_ImpactData": {
+                "type": "ref",
+                "name": "_ImpactData"
             },
             "_Light": {
                 "type": "ref",
@@ -2098,6 +2205,10 @@
             "_Script": {
                 "type": "ref",
                 "name": "_Script"
+            },
+            "_ScriptAsset": {
+                "type": "ref",
+                "name": "_ScriptAsset"
             },
             "_SmartAudio": {
                 "type": "ref",
@@ -2182,10 +2293,6 @@
             "_Weapon": {
                 "type": "ref",
                 "name": "_Weapon"
-            },
-            "_WeaponInteraction": {
-                "type": "ref",
-                "name": "_WeaponInteraction"
             },
             "_WorldText": {
                 "type": "ref",
@@ -2636,6 +2743,197 @@
                 }
             }
         },
+        "_AnimatedMesh": {
+            "type": "table",
+            "fields": {
+                "animationStance": {
+                    "type": "string"
+                },
+                "animationStancePlaybackRate": {
+                    "type": "number"
+                },
+                "animationStanceShouldLoop": {
+                    "type": "bool"
+                },
+                "playbackRateMultiplier": {
+                    "type": "number"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "GetAnimationNames": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "table"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "GetAnimationStanceNames": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "table"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "GetSocketNames": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "table"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "GetAnimationEventNames": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "table"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "animationName"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "AttachCoreObject": {
+                    "type": "function",
+                    "returnTypes": [],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "objectToAttach"
+                                },
+                                {
+                                    "name": "socket"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "PlayAnimation": {
+                    "type": "function",
+                    "returnTypes": [],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "animationName"
+                                },
+                                {
+                                    "name": "optionalParameters"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "StopAnimations": {
+                    "type": "function",
+                    "returnTypes": [],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "GetAnimationDuration": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "number"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "animationName"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "IsA": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "bool"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "typeName"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "metatable": {
+                "type": "table",
+                "fields": {
+                    "__index": {
+                        "type": "ref",
+                        "name": "_CoreMesh"
+                    }
+                }
+            }
+        },
         "_AreaLight": {
             "type": "table",
             "fields": {
@@ -2831,27 +3129,9 @@
         "_Camera": {
             "type": "table",
             "fields": {
-                "lerpTime": {
-                    "type": "number"
-                },
                 "followPlayer": {
                     "type": "ref",
                     "name": "_Player"
-                },
-                "isUsingCameraRotation": {
-                    "type": "bool"
-                },
-                "hasFreeControl": {
-                    "type": "bool"
-                },
-                "isDistanceAdjustable": {
-                    "type": "bool"
-                },
-                "minDistance": {
-                    "type": "number"
-                },
-                "maxDistance": {
-                    "type": "number"
                 },
                 "isOrthographic": {
                     "type": "bool"
@@ -2862,8 +3142,54 @@
                 "viewWidth": {
                     "type": "number"
                 },
+                "useCameraSocket": {
+                    "type": "bool"
+                },
                 "currentDistance": {
                     "type": "number"
+                },
+                "isDistanceAdjustable": {
+                    "type": "bool"
+                },
+                "minDistance": {
+                    "type": "number"
+                },
+                "maxDistance": {
+                    "type": "number"
+                },
+                "rotationMode": {
+                    "type": "ref",
+                    "name": "_RotationMode"
+                },
+                "hasFreeControl": {
+                    "type": "bool"
+                },
+                "currentPitch": {
+                    "type": "number"
+                },
+                "minPitch": {
+                    "type": "number"
+                },
+                "maxPitch": {
+                    "type": "number"
+                },
+                "isYawLimited": {
+                    "type": "bool"
+                },
+                "currentYaw": {
+                    "type": "number"
+                },
+                "minYaw": {
+                    "type": "number"
+                },
+                "maxYaw": {
+                    "type": "number"
+                },
+                "lerpTime": {
+                    "type": "number"
+                },
+                "isUsingCameraRotation": {
+                    "type": "bool"
                 },
                 "type": {
                     "type": "string"
@@ -3028,6 +3354,108 @@
                 }
             }
         },
+        "_CoreMesh": {
+            "type": "table",
+            "fields": {
+                "meshAssetId": {
+                    "type": "string"
+                },
+                "team": {
+                    "type": "integer"
+                },
+                "isTeamColorUsed": {
+                    "type": "bool"
+                },
+                "isTeamCollisionEnabled": {
+                    "type": "bool"
+                },
+                "isEnemyCollisionEnabled": {
+                    "type": "bool"
+                },
+                "isCameraCollisionEnabled": {
+                    "type": "bool"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "GetColor": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "ref",
+                            "name": "_Color"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "SetColor": {
+                    "type": "function",
+                    "returnTypes": [],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "color"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "ResetColor": {
+                    "type": "function",
+                    "returnTypes": [],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "IsA": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "bool"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "typeName"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "metatable": {
+                "type": "table",
+                "fields": {
+                    "__index": {
+                        "type": "ref",
+                        "name": "_CoreObject"
+                    }
+                }
+            }
+        },
         "_CoreObject": {
             "type": "table",
             "fields": {
@@ -3037,11 +3465,19 @@
                 "id": {
                     "type": "string"
                 },
-                "visibility": {
+                "isVisible": {
                     "type": "bool"
+                },
+                "visibility": {
+                    "type": "ref",
+                    "name": "_Visibility"
                 },
                 "isCollidable": {
                     "type": "bool"
+                },
+                "collision": {
+                    "type": "ref",
+                    "name": "_Collision"
                 },
                 "isEnabled": {
                     "type": "bool"
@@ -3524,7 +3960,7 @@
                         }
                     ]
                 },
-                "visibilityInHierarchy": {
+                "IsVisibleInHierarchy": {
                     "type": "function",
                     "returnTypes": [
                         {
@@ -4363,6 +4799,23 @@
                         }
                     ]
                 },
+                "GetCustomProperties": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "table"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
                 "GetCustomProperty": {
                     "type": "function",
                     "returnTypes": [
@@ -4956,6 +5409,95 @@
                 }
             }
         },
+        "_ImpactData": {
+            "type": "table",
+            "fields": {
+                "targetObject": {
+                    "type": "ref",
+                    "name": "_Object"
+                },
+                "projectile": {
+                    "type": "ref",
+                    "name": "_Projectile"
+                },
+                "sourceAbility": {
+                    "type": "ref",
+                    "name": "_Ability"
+                },
+                "weapon": {
+                    "type": "ref",
+                    "name": "_Weapon"
+                },
+                "weaponOwner": {
+                    "type": "ref",
+                    "name": "_Player"
+                },
+                "isHeadshot": {
+                    "type": "bool"
+                },
+                "travelDistance": {
+                    "type": "number"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "GetHitResult": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "ref",
+                            "name": "_HitResult"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "GetHitResults": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "table"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "IsA": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "bool"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "typeName"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
         "_Light": {
             "type": "table",
             "fields": {
@@ -5235,7 +5777,7 @@
                 "buoyancy": {
                     "type": "number"
                 },
-                "visibilityToSelf": {
+                "isVisibleToSelf": {
                     "type": "bool"
                 },
                 "spreadModifier": {
@@ -5364,6 +5906,40 @@
                                 },
                                 {
                                     "name": "worldRotation"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "GetWorldScale": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "ref",
+                            "name": "_Vector3"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "SetWorldScale": {
+                    "type": "function",
+                    "returnTypes": [],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "worldScale"
                                 }
                             ]
                         }
@@ -5558,7 +6134,7 @@
                                     "name": "self"
                                 },
                                 {
-                                    "name": "visibility"
+                                    "name": "isVisible"
                                 },
                                 {
                                     "name": "includeAttachments"
@@ -5571,7 +6147,7 @@
                                     "name": "self"
                                 },
                                 {
-                                    "name": "visibility"
+                                    "name": "isVisible"
                                 }
                             ]
                         }
@@ -5888,6 +6464,24 @@
                                 },
                                 {
                                     "name": "isMounted"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "GetActiveCamera": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "ref",
+                            "name": "_Camera"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
                                 }
                             ]
                         }
@@ -6266,7 +6860,7 @@
                 },
                 "homingTarget": {
                     "type": "ref",
-                    "name": "_Player"
+                    "name": "_Object"
                 },
                 "homingAcceleration": {
                     "type": "number"
@@ -6778,6 +7372,90 @@
                 }
             }
         },
+        "_ScriptAsset": {
+            "type": "table",
+            "fields": {
+                "name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "GetCustomProperties": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "table"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "GetCustomProperty": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "ref",
+                            "name": "_value"
+                        },
+                        {
+                            "type": "bool"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "propertyName"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "IsA": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "bool"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "typeName"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "metatable": {
+                "type": "table",
+                "fields": {
+                    "__index": {
+                        "type": "ref",
+                        "name": "_Object"
+                    }
+                }
+            }
+        },
         "_SmartAudio": {
             "type": "table",
             "fields": {
@@ -6789,6 +7467,15 @@
                 },
                 "isOcclusionEnabled": {
                     "type": "bool"
+                },
+                "fadeInTime": {
+                    "type": "number"
+                },
+                "fadeOutTime": {
+                    "type": "number"
+                },
+                "startTime": {
+                    "type": "number"
                 },
                 "isAutoPlayEnabled": {
                     "type": "bool"
@@ -6843,6 +7530,38 @@
                         }
                     ]
                 },
+                "FadeIn": {
+                    "type": "function",
+                    "returnTypes": [],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "unknown"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "FadeOut": {
+                    "type": "function",
+                    "returnTypes": [],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "unknown"
+                                }
+                            ]
+                        }
+                    ]
+                },
                 "IsA": {
                     "type": "function",
                     "returnTypes": [
@@ -6885,6 +7604,23 @@
                 },
                 "type": {
                     "type": "string"
+                },
+                "GetSmartProperties": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "table"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
                 },
                 "GetSmartProperty": {
                     "type": "function",
@@ -7025,70 +7761,8 @@
                 "isSimulatingDebrisPhysics": {
                     "type": "bool"
                 },
-                "team": {
-                    "type": "integer"
-                },
-                "isTeamColorUsed": {
-                    "type": "bool"
-                },
-                "isTeamCollisionEnabled": {
-                    "type": "bool"
-                },
-                "isEnemyCollisionEnabled": {
-                    "type": "bool"
-                },
-                "isCameraCollisionEnabled": {
-                    "type": "bool"
-                },
                 "type": {
                     "type": "string"
-                },
-                "GetColor": {
-                    "type": "function",
-                    "returnTypes": [
-                        {
-                            "type": "ref",
-                            "name": "_Color"
-                        }
-                    ],
-                    "variants": [
-                        {
-                            "args": [
-                                {
-                                    "name": "self"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                "SetColor": {
-                    "type": "function",
-                    "returnTypes": [],
-                    "variants": [
-                        {
-                            "args": [
-                                {
-                                    "name": "self"
-                                },
-                                {
-                                    "name": "color"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                "ResetColor": {
-                    "type": "function",
-                    "returnTypes": [],
-                    "variants": [
-                        {
-                            "args": [
-                                {
-                                    "name": "self"
-                                }
-                            ]
-                        }
-                    ]
                 },
                 "IsA": {
                     "type": "function",
@@ -7116,7 +7790,7 @@
                 "fields": {
                     "__index": {
                         "type": "ref",
-                        "name": "_CoreObject"
+                        "name": "_CoreMesh"
                     }
                 }
             }
@@ -8117,6 +8791,40 @@
                         }
                     ]
                 },
+                "GetBackgroundColor": {
+                    "type": "function",
+                    "returnTypes": [
+                        {
+                            "type": "ref",
+                            "name": "_Color"
+                        }
+                    ],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "SetBackgroundColor": {
+                    "type": "function",
+                    "returnTypes": [],
+                    "variants": [
+                        {
+                            "args": [
+                                {
+                                    "name": "self"
+                                },
+                                {
+                                    "name": "color"
+                                }
+                            ]
+                        }
+                    ]
+                },
                 "IsA": {
                     "type": "function",
                     "returnTypes": [
@@ -8545,6 +9253,9 @@
                 "range": {
                     "type": "number"
                 },
+                "damage": {
+                    "type": "number"
+                },
                 "directDamage": {
                     "type": "number"
                 },
@@ -8723,95 +9434,6 @@
                 }
             }
         },
-        "_WeaponInteraction": {
-            "type": "table",
-            "fields": {
-                "targetObject": {
-                    "type": "ref",
-                    "name": "_Object"
-                },
-                "projectile": {
-                    "type": "ref",
-                    "name": "_Projectile"
-                },
-                "sourceAbility": {
-                    "type": "ref",
-                    "name": "_Ability"
-                },
-                "weapon": {
-                    "type": "ref",
-                    "name": "_Weapon"
-                },
-                "weaponOwner": {
-                    "type": "ref",
-                    "name": "_Player"
-                },
-                "isHeadshot": {
-                    "type": "bool"
-                },
-                "travelDistance": {
-                    "type": "number"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "GetHitResult": {
-                    "type": "function",
-                    "returnTypes": [
-                        {
-                            "type": "ref",
-                            "name": "_HitResult"
-                        }
-                    ],
-                    "variants": [
-                        {
-                            "args": [
-                                {
-                                    "name": "self"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                "GetHitResults": {
-                    "type": "function",
-                    "returnTypes": [
-                        {
-                            "type": "table"
-                        }
-                    ],
-                    "variants": [
-                        {
-                            "args": [
-                                {
-                                    "name": "self"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                "IsA": {
-                    "type": "function",
-                    "returnTypes": [
-                        {
-                            "type": "bool"
-                        }
-                    ],
-                    "variants": [
-                        {
-                            "args": [
-                                {
-                                    "name": "self"
-                                },
-                                {
-                                    "name": "typeName"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
-        },
         "_WorldText": {
             "type": "table",
             "fields": {
@@ -8940,6 +9562,20 @@
                 }
             }
         },
+        "_Collision": {
+            "type": "table",
+            "fields": {
+                "INHERIT": {
+                    "type": "integer"
+                },
+                "FORCE_ON": {
+                    "type": "integer"
+                },
+                "FORCE_OFF": {
+                    "type": "integer"
+                }
+            }
+        },
         "_DamageReason": {
             "type": "table",
             "fields": {
@@ -9031,6 +9667,37 @@
                 }
             }
         },
+        "_RotationMode": {
+            "type": "table",
+            "fields": {
+                "CAMERA": {
+                    "type": "integer"
+                },
+                "NONE": {
+                    "type": "integer"
+                },
+                "LOOK_ANGLE": {
+                    "type": "integer"
+                }
+            }
+        },
+        "_StorageResultCode": {
+            "type": "table",
+            "fields": {
+                "SUCCESS": {
+                    "type": "integer"
+                },
+                "FAILURE": {
+                    "type": "integer"
+                },
+                "STORAGE_DISABLED": {
+                    "type": "integer"
+                },
+                "EXCEEDED_SIZE_LIMIT": {
+                    "type": "integer"
+                }
+            }
+        },
         "_TaskStatus": {
             "type": "table",
             "fields": {
@@ -9070,6 +9737,20 @@
                     "type": "integer"
                 },
                 "RIGHT": {
+                    "type": "integer"
+                }
+            }
+        },
+        "_Visibility": {
+            "type": "table",
+            "fields": {
+                "INHERIT": {
+                    "type": "integer"
+                },
+                "FORCE_ON": {
+                    "type": "integer"
+                },
+                "FORCE_OFF": {
                     "type": "integer"
                 }
             }

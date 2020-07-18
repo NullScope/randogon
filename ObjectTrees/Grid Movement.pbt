@@ -75,9 +75,9 @@ Objects {
       }
     }
     Overrides {
-      Name: "cs:HumanGuy"
-      ObjectReference {
-        SelfId: 10544685272406483070
+      Name: "cs:ClassAPI"
+      AssetReference {
+        Id: 11160179604066860111
       }
     }
   }

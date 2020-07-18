@@ -1,7 +1,7 @@
 local class = require("84B57FF34D5F0981:middleclass")
 local ModifierAPI = require("709F3B14F7430F53:ModifierAPI")
 
-local ModifierManagerServer = class('ModifierManagerServer')
+local ModifierManagerServer = class("ModifierManagerServer")
 
 ModifierManagerServer.static.MODIFIER_STATE_INVULNERABLE = 1
 ModifierManagerServer.static.MODIFIER_STATE_ROOTED = 2

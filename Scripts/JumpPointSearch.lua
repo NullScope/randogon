@@ -8,7 +8,17 @@ function JumpPointSearch:initialize(manager)
     self.manager = manager
 end
 
+--- Find the path from startNode to endNode within the same grid
+-- @param startNode The starting node, see @{node}
+-- @param endNode The ending node, see @{node}
+-- @param debugLevel The level of debug, >= 1 show start and end nodes, >= 2 show jump point nodes, >= 3 show all sucessor nodes
+-- @return Table containing all nodes for the path, see @{node}
+-- @return Empty Table if no path found or if the grids of startNode and endNode differ
 function JumpPointSearch:FindPath(startNode, endNode, debugLevel)
+    if startNode.grid ~= endNode.grid then
+        return {}
+    end
+
     local path = {}
 
     self.openList = {}
@@ -20,8 +30,8 @@ function JumpPointSearch:FindPath(startNode, endNode, debugLevel)
     self.debugLevel = debugLevel
 
     if self.debugLevel >= 1 then
-        self.manager:DebugDrawNode(startNode.worldPosition, startNode.dimension / 2, Color.GREEN, self.debugLevel)
-        self.manager:DebugDrawNode(endNode.worldPosition, endNode.dimension / 2, Color.RED, self.debugLevel)
+        self.manager:DebugDrawNode(startNode.worldPosition, startNode.dimension / 2, Color.GREEN, self.debugLevel, 3)
+        self.manager:DebugDrawNode(endNode.worldPosition, endNode.dimension / 2, Color.RED, self.debugLevel, 3)
     end
 
     local startJumpPoint = self:GetJumpPoint(self.startNode)
@@ -29,7 +39,15 @@ function JumpPointSearch:FindPath(startNode, endNode, debugLevel)
     table.insert(self.openList, startJumpPoint)
 
     while #self.openList > 0 do
-        local jumpPoint = table.remove(self.openList, 1)
+        local lowestJumpPointIndex = 1
+
+        for i, jumpPoint in ipairs(self.openList) do
+            if self.openList[lowestJumpPointIndex].f > jumpPoint.f then
+                lowestJumpPointIndex = i
+            end
+        end
+
+        local jumpPoint = table.remove(self.openList, lowestJumpPointIndex)
         jumpPoint.closed = true
 
         if jumpPoint.node == self.endNode then
@@ -43,19 +61,24 @@ function JumpPointSearch:FindPath(startNode, endNode, debugLevel)
     if self.debugLevel >= 1 then
         for key, node in ipairs(path) do
             if key > 1 then
-                CoreDebug.DrawLine(node.worldPosition + Vector3.New(0,0,10), path[key - 1].worldPosition + Vector3.New(0,0,10), {
-                    color = Color.BLUE,
-                    duration = 9007199254740992
+                CoreDebug.DrawLine(node.worldPosition + Vector3.New(0,0,10 - node.dimension.z / 2), path[key - 1].worldPosition + Vector3.New(0,0,10 - path[key - 1].dimension.z / 2), {
+                    color = Color.YELLOW,
+                    duration = 3
                 })
             end
 
-            self.manager:DebugDrawNode(node.worldPosition, node.dimension / 2, Color.BLUE, self.debugLevel)
+            if key > 1 and key < #path then
+                self.manager:DebugDrawNode(node.worldPosition, node.dimension / 2, Color.YELLOW, self.debugLevel, 3)
+            end
         end
     end
 
     return path
 end
 
+--- Get the jump point for given node
+-- @param node, see @{node}
+-- @return jumpPoint, see @{jumpPoint}
 function JumpPointSearch:GetJumpPoint(node)
     local jumpPoint = self.jumpPoints[node]
 
@@ -78,6 +101,9 @@ function JumpPointSearch:GetJumpPoint(node)
     end
 end
 
+--- Get the path from start jump point to this jump point
+-- @param jumpPoint, see @{jumpPoint}
+-- @return path Table containing the nodes from the start jump point to the target jump point
 function JumpPointSearch:BuildPath(jumpPoint)
     local path = {}
 
@@ -91,24 +117,40 @@ function JumpPointSearch:BuildPath(jumpPoint)
     return path
 end
 
+--- Get node for given position
+-- @param position Position in Vector2 (must be integer values)
+-- @return node, see @{node}
 function JumpPointSearch:GetNode(position)
     return self.grid[position.x][position.y]
 end
 
-function JumpPointSearch:GetGridDistance(nodePosition, parentPosition)
-    return (nodePosition - parentPosition) / self.nodeDimension
+--- Get the grid distance between two positions based on the node dimension
+-- @param nodePosition Position in Vector2
+-- @param parentPosition Position in Vector2
+-- @return number
+function JumpPointSearch:GetGridDistance(nodePosition, targetPosition)
+    return (nodePosition - targetPosition) / self.nodeDimension
 end
 
-function JumpPointSearch:GetGridDirection(nodePosition, parentPosition)
-    local distance = self:GetGridDistance(nodePosition, parentPosition)
+--- Get the grid distance between two positions
+-- @param nodePosition Position in Vector2
+-- @param parentPosition Position in Vector2
+-- @return direction Direction in Vector2
+function JumpPointSearch:GetGridDirection(nodePosition, targetPosition)
+    local distance = self:GetGridDistance(nodePosition, targetPosition)
 
-    return distance / Vector3.New(math.max(math.abs(distance.x), 1), math.max(math.abs(distance.y), 1), math.max(math.abs(distance.z), 1))
+    distance = distance / Vector3.New(math.max(math.abs(distance.x), 1), math.max(math.abs(distance.y), 1), math.max(math.abs(distance.z), 1))
+
+    distance.x = math.floor(distance.x+0.5)
+    distance.y = math.floor(distance.y+0.5)
+
+    return distance
 end
 
---- Gets the neighboring nodes of the requested node
+--- Gets the natural neighboring nodes of the requested node
 -- @param node Center node of the neighbors, see @{node}
 -- @param parent N
--- @return Table with all the neighbor nodes, see @{node}
+-- @return Table with all the natural neighbor nodes, see @{node}
 function JumpPointSearch:GetNaturalNeighborNodes(node, parent)
     local nodes = {}
     local naturalNeighbors
@@ -166,10 +208,10 @@ function JumpPointSearch:GetNaturalNeighborNodes(node, parent)
     return nodes
 end
 
---- Gets the neighboring nodes of the requested node
+--- Gets the forced neighboring nodes of the requested node
 -- @param node Center node of the neighbors, see @{node}
 -- @param parent N
--- @return Table with all the neighbor nodes, see @{node}
+-- @return Table with all the forced neighbor nodes, see @{node}
 function JumpPointSearch:GetForcedNeighborNodes(node, parent)
     local nodes = {}
     local forcedNeighbors = {}
@@ -236,6 +278,10 @@ function JumpPointSearch:GetForcedNeighborNodes(node, parent)
     return nodes
 end
 
+--- Get the natural and forced neighbors of node
+-- @param node, see @{node}
+-- @param parent, parent of the node to decide the forced neighbors, see @{node}
+-- @param Table containing all neighbor nodes, see @{node}
 function JumpPointSearch:GetNeighborNodes(node, parent)
     local neighbors = self:GetNaturalNeighborNodes(node, parent)
 
@@ -245,6 +291,7 @@ function JumpPointSearch:GetNeighborNodes(node, parent)
 
     return neighbors
 end
+
 
 function JumpPointSearch:Jump(nodePosition, parentPosition)
     local direction = nodePosition - parentPosition
@@ -263,7 +310,7 @@ function JumpPointSearch:Jump(nodePosition, parentPosition)
     end
 
     if self.debugLevel >= 3 then
-        self.manager:DebugDrawNode(node.worldPosition, node.dimension / 2, Color.ORANGE, math.max(self.debugLevel - 3, 1))
+        self.manager:DebugDrawNode(node.worldPosition, node.dimension / 2, Color.ORANGE, math.max(self.debugLevel - 3, 1), 1)
     end
 
     if node == self.endNode then
@@ -301,15 +348,15 @@ function JumpPointSearch:GetSuccessors(jumpPoint)
             if not foundJumpPoint.closed then
 
                 if self.debugLevel >= 2 then
-                    self.manager:DebugDrawNode(foundJumpPoint.node.worldPosition, node.dimension / 2, Color.CYAN, math.max(self.debugLevel - 2, 1))
+                    self.manager:DebugDrawNode(foundJumpPoint.node.worldPosition, node.dimension / 2, Color.CYAN, math.max(self.debugLevel - 2, 1), 3)
                 end
 
-                local d = Vector3.New(foundJumpPoint.node.worldPosition - node.worldPosition).size
+                local d = Vector3.New(foundJumpPoint.node.worldPosition - node.worldPosition).sizeSquared
                 local g = foundJumpPoint.g + d
 
                 if not foundJumpPoint.opened or g < foundJumpPoint.g then
                     foundJumpPoint.g = g
-                    foundJumpPoint.h = foundJumpPoint.h or Vector3.New(foundJumpPoint.node.worldPosition - self.endNode.worldPosition).size
+                    foundJumpPoint.h = foundJumpPoint.h or Vector3.New(foundJumpPoint.node.worldPosition - self.endNode.worldPosition).sizeSquared
                     foundJumpPoint.f = foundJumpPoint.g + foundJumpPoint.h
                     foundJumpPoint.parent = jumpPoint
 
