@@ -13,12 +13,20 @@ while not PathfindingAPI.registeredOnServer do
 end
 
 function createGrid()
+	local isRotated = math.ceil(math.abs(Root:GetWorldRotation().z)) % 180 ~= 0 and math.ceil(math.abs(Root:GetWorldRotation().z)) % 90 == 0
+	
     local GridNodeDimension = Vector3.New(100, 100, 100) * GridNode:GetScale()
     local GridTriggerDimension = Vector3.New(100, 100, 100) * GridTrigger:GetScale()
+                    
+    if isRotated then
+    	GridTriggerDimension = Vector3.New(GridTriggerDimension.y, GridTriggerDimension.x, GridTriggerDimension.z)
+    end
+    
     local GridDimension = GridTriggerDimension / GridNodeDimension
-
-    local startingPoint = GridTrigger:GetWorldPosition() - GridTriggerDimension / 2 + GridNodeDimension / 2
-
+    	
+	local startingPoint = GridTrigger:GetWorldPosition() - GridTriggerDimension / 2 + GridNodeDimension / 2
+	
+    
     local grid = {}
 
     GridNode:SetWorldRotation(Root:GetWorldRotation())
@@ -41,9 +49,10 @@ function createGrid()
             -- Start at the top left of the grid, offset the node anchor to the top left,
             -- then add the node dimension times the current place in the grid
             -- and offset by the position of the grid (correcting the Z)
-            GridNode:SetWorldPosition(
-                startingPoint
-                + (GridNodeDimension * Vector3.New(x, y, 0))
+            
+        	GridNode:SetWorldPosition(
+            	startingPoint
+            	+ (GridNodeDimension * Vector3.New(x, y, 0))
             )
 
             for _, object in ipairs(GridNode:GetOverlappingObjects()) do
@@ -90,9 +99,9 @@ function createGrid()
                     rotation = GridNode:GetWorldPosition()
                 })
             end
-
-            Task.Wait()
         end
+        
+        Task.Wait()
     end
 
     PathfindingAPI:AddGrid(Root.id, Root.name, grid, GridNodeDimension, {})

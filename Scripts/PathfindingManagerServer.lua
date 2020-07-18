@@ -224,7 +224,7 @@ function PathfindingManagerServer:AddGrid(id, name, grid, nodeDimension)
             local nodeSize = nodeDimension.x > neighborGrid.nodeDimension.x and nodeDimension.x or neighborGrid.nodeDimension.x
 
             for _, neighborNode in ipairs(neighborEdgeNodes) do
-                local distance = math.floor((node.worldPosition - neighborNode.worldPosition).sizeSquared)
+                local distance = math.floor((node.worldPosition - neighborNode.worldPosition).size)
 
                 if distance <= nodeSize then
 
