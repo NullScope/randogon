@@ -41,10 +41,9 @@ function MapGeneratorServer:initialize()
     MapGeneratorAPI:RegisterServer(self)
 
     self:GenerateRooms()
-
-    Task.Wait()
-
-    Events.Broadcast("StartGridCreation")
+    
+    --Task.Wait()
+    --Events.Broadcast("StartGridCreation")
 end
 
 function MapGeneratorServer:FindClosestNumber(n, m)
@@ -73,8 +72,8 @@ function MapGeneratorServer:FindClosestNumber(n, m)
 end
 
 function MapGeneratorServer:GenerateRooms()
-    local totalRooms = self.randomStream:GetInteger(30, 50)
-    local totalDepth = self.randomStream:GetInteger(5, 10)
+    local totalRooms = self.randomStream:GetInteger(50, 50)
+    local totalDepth = self.randomStream:GetInteger(10, 10)
     local rooms = {}
 
     local spawnRooms
@@ -154,6 +153,9 @@ function MapGeneratorServer:GenerateRooms()
         end
 
         table.insert(rooms, room)
+        
+        Task.Wait()
+        Events.Broadcast("StartGridCreation")
 
         local connections = room.room:FindChildByName("Connections"):GetChildren()
 

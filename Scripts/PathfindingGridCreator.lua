@@ -8,11 +8,17 @@ local CollisionTeam = script.parent:GetCustomProperty("CollisionTeam")
 local StartEvent = script.parent:GetCustomProperty("StartEvent")
 local Debug = script.parent:GetCustomProperty("Debug")
 
+local isGridCreated = false
+
 while not PathfindingAPI.registeredOnServer do
     Task.Wait()
 end
 
 function createGrid()
+	if not Object.IsValid(Root) then
+		return
+	end
+	
 	local isRotated = math.ceil(math.abs(Root:GetWorldRotation().z)) % 180 ~= 0 and math.ceil(math.abs(Root:GetWorldRotation().z)) % 90 == 0
 	
     local GridNodeDimension = Vector3.New(100, 100, 100) * GridNode:GetScale()
@@ -108,7 +114,12 @@ function createGrid()
 end
 
 if StartEvent then
-    Events.Connect(StartEvent, function () createGrid() end)
+    Events.Connect(StartEvent, function ()
+    	if not isGridCreated then
+    		isGridCreated = true
+    		createGrid()
+    	end 
+    end)
 else
     createGrid()
 end

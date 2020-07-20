@@ -77,7 +77,9 @@ Assets {
         Name: "Plane 1m - One Sided"
         Transform {
           Location {
-            Y: -800
+            X: -0.00048828125
+            Y: -800.000061
+            Z: -0.000122070312
           }
           Rotation {
           }
@@ -267,7 +269,6 @@ Assets {
         Name: "Floor"
         Transform {
           Location {
-            Z: -0.000244140625
           }
           Rotation {
             Roll: -179.999954
@@ -1135,7 +1136,7 @@ Assets {
         Name: "GridTrigger"
         Transform {
           Location {
-            Z: 50
+            Z: 49.9998779
           }
           Rotation {
           }

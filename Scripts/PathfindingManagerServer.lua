@@ -257,6 +257,8 @@ function PathfindingManagerServer:AddGrid(id, name, grid, nodeDimension)
                     })
                 end
             end
+            
+            Task.Wait()
         end
     end
 
@@ -270,6 +272,8 @@ function PathfindingManagerServer:AddGrid(id, name, grid, nodeDimension)
 
                 self:DebugDrawNode(node.worldPosition, nodeDimension / 2, color, node.occupied and 2 or 1)
             end
+            
+            Task.Wait()
         end
     end
 
