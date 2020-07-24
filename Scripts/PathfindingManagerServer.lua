@@ -48,13 +48,28 @@ local DebugPathingLevel = script:GetCustomProperty("DebugPathingLevel")
 
 -- Constructor
 function PathfindingManagerServer:initialize()
+	self.queue = {}
     self.grids = {}
     self.moveTasks = {}
     self.pathFinder = PathFinder:new(self)
 
     self:SetupEvents()
+    
+	self.queueHandler = Task.Spawn(function () self:HandleQueue() end, 0)
+	self.queueHandler.repeatCount = -1
+	self.queueHandler.repeatInterval = 0
 
     PathfindingAPI:RegisterServer(self)
+end
+
+-- Handle the grid queue
+function PathfindingManagerServer:HandleQueue()
+	if #self.queue > 0 then
+		local newGrid = table.remove(self.queue)
+		self:AddGrid(newGrid.id, newGrid.name, newGrid.grid, newGrid.nodeDimension)
+	end
+	
+	Task.Wait()
 end
 
 -- Setup needed events
@@ -172,7 +187,16 @@ function PathfindingManagerServer:FindGridPath(startGrid, endGrid)
     return { }
 end
 
+function PathfindingManagerServer:AddNewGrid(id, name, grid, nodeDimension)
+	local newGrid = {
+		id = id,
+		name = name,
+		grid = grid,
+		nodeDimension = nodeDimension
+	}
 
+	table.insert(self.queue, newGrid)
+end
 
 --- Adds the grid to the overall grid map
 -- For each edge node of the grid, look at all other grids
@@ -219,47 +243,49 @@ function PathfindingManagerServer:AddGrid(id, name, grid, nodeDimension)
             end
         end
 
-        for _, neighborGrid in pairs(self.grids) do
-            local neighborEdgeNodes = neighborGrid.edgeNodes
-            local nodeSize = nodeDimension.x > neighborGrid.nodeDimension.x and nodeDimension.x or neighborGrid.nodeDimension.x
-
-            for _, neighborNode in ipairs(neighborEdgeNodes) do
-                local distance = math.floor((node.worldPosition - neighborNode.worldPosition).size)
-
-                if distance <= nodeSize then
-
-                    -- Create a new neighbor if it doesn't exist
-                    -- with the grid neighbor grid
-                    if not newGrid.neighbors[neighborGrid.id] then
-                        newGrid.neighbors[neighborGrid.id] = {
-                            grid = neighborGrid,
-                            connectedNodes = {}
-                        }
-                    end
-
-                    -- Update the neighbor connected nodes of this grid
-                    table.insert(newGrid.neighbors[neighborGrid.id].connectedNodes, {
-                        node = node,
-                        neighborNode = neighborNode
-                    })
-
-                    if not neighborGrid.neighbors[id] then
-                        neighborGrid.neighbors[id] = {
-                            grid = newGrid,
-                            connectedNodes = {}
-                        }
-                    end
-
-                    -- Update the connected nodes of the neighbor grid
-                    table.insert(neighborGrid.neighbors[id].connectedNodes, {
-                        node = neighborNode,
-                        neighborNode = node
-                    })
-                end
-            end
-            
-            Task.Wait()
-        end
+		if not node.occupied then
+	        for _, neighborGrid in pairs(self.grids) do
+	            local neighborEdgeNodes = neighborGrid.edgeNodes
+	            local nodeSize = nodeDimension.x > neighborGrid.nodeDimension.x and nodeDimension.x or neighborGrid.nodeDimension.x
+	
+	            for _, neighborNode in ipairs(neighborEdgeNodes) do
+	                local distance = math.floor((node.worldPosition - neighborNode.worldPosition).size)
+	
+	                if not neighborNode.occupied and distance <= nodeSize then
+	                
+	                    -- Create a new neighbor if it doesn't exist
+	                    -- with the grid neighbor grid
+	                    if not newGrid.neighbors[neighborGrid.id] then
+	                        newGrid.neighbors[neighborGrid.id] = {
+	                            grid = neighborGrid,
+	                            connectedNodes = {}
+	                        }
+	                    end
+	
+	                    -- Update the neighbor connected nodes of this grid
+	                    table.insert(newGrid.neighbors[neighborGrid.id].connectedNodes, {
+	                        node = node,
+	                        neighborNode = neighborNode
+	                    })
+	
+	                    if not neighborGrid.neighbors[id] then
+	                        neighborGrid.neighbors[id] = {
+	                            grid = newGrid,
+	                            connectedNodes = {}
+	                        }
+	                    end
+	
+	                    -- Update the connected nodes of the neighbor grid
+	                    table.insert(neighborGrid.neighbors[id].connectedNodes, {
+	                        node = neighborNode,
+	                        neighborNode = node
+	                    })
+	                end
+	            end
+	            
+	            --Task.Wait()
+	        end
+		end
     end
 
     newGrid.dimension = (newGrid.maxPoint - newGrid.minPoint) + nodeDimension
@@ -273,7 +299,7 @@ function PathfindingManagerServer:AddGrid(id, name, grid, nodeDimension)
                 self:DebugDrawNode(node.worldPosition, nodeDimension / 2, color, node.occupied and 2 or 1)
             end
             
-            Task.Wait()
+            --Task.Wait()
         end
     end
 
@@ -339,7 +365,7 @@ function PathfindingManagerServer:FindNearestNode(position)
         for _, node in ipairs(grid.edgeNodes) do
             local distance = Vector3.New(node.worldPosition - position).sizeSquared
 
-            if not nearestEdgeNode or distance < shortestEdgeNodeDistance then
+            if not nearestEdgeNode or (not node.occupied and distance < shortestEdgeNodeDistance) then
                 nearestGrid = grid
                 nearestEdgeNode = node
                 shortestEdgeNodeDistance = distance
@@ -358,7 +384,7 @@ function PathfindingManagerServer:FindNearestNode(position)
                 for y, node in ipairs(row) do
                     local distance = Vector3.New(node.worldPosition - position).sizeSquared
 
-                    if not nearestNode or distance < shortestNodeDistance then
+                    if not nearestNode or (not node.occupied and distance < shortestNodeDistance) then
                         nearestNode = node
                         shortestNodeDistance = distance
                     end

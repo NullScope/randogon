@@ -44,7 +44,7 @@ function createGrid()
             rotation = GridTrigger:GetWorldRotation()
         })
     end
-
+    
     for x = 0, GridDimension.x - 1 do
         table.insert(grid, {})
 
@@ -55,15 +55,13 @@ function createGrid()
             -- Start at the top left of the grid, offset the node anchor to the top left,
             -- then add the node dimension times the current place in the grid
             -- and offset by the position of the grid (correcting the Z)
-            
         	GridNode:SetWorldPosition(
             	startingPoint
             	+ (GridNodeDimension * Vector3.New(x, y, 0))
             )
 
             for _, object in ipairs(GridNode:GetOverlappingObjects()) do
-                -- print(object.name)
-                -- Avoid players and the grid trigger
+            	-- Avoid players and the grid trigger
                 if object ~= GridTrigger and object:IsA("CoreObject") then
                     local ancestor = object:FindAncestorByName(Root.name)
 
@@ -104,13 +102,13 @@ function createGrid()
                     duration = 9007199254740992,
                     rotation = GridNode:GetWorldPosition()
                 })
+                
+                Task.Wait()
             end
         end
-        
-        Task.Wait()
-    end
+     end
 
-    PathfindingAPI:AddGrid(Root.id, Root.name, grid, GridNodeDimension, {})
+    PathfindingAPI:AddNewGrid(Root.id, Root.name, grid, GridNodeDimension, {})
 end
 
 if StartEvent then

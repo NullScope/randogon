@@ -199,7 +199,7 @@ function JumpPointSearch:GetNaturalNeighborNodes(node, parent)
         if self:IsWalkable(neighborNodePosition) then
             local neighborNode = self:GetNode(neighborNodePosition)
 
-            if Vector3.New(neighborNode.worldPosition - node.worldPosition).sizeSquared <= node.dimension.sizeSquared then
+            if Vector3.New(node.worldPosition- neighborNode.worldPosition).size <= node.dimension.size then
                 table.insert(nodes, neighborNode)
             end
         end
@@ -269,7 +269,7 @@ function JumpPointSearch:GetForcedNeighborNodes(node, parent)
         if self:IsWalkable(forcedNeighborPosition) and self:IsInsideGrid(neighborNodePosition) and not self:IsWalkable(neighborNodePosition) then
             local neighborNode = self:GetNode(forcedNeighborPosition)
 
-            if Vector3.New(neighborNode.worldPosition - node.worldPosition).sizeSquared <= node.dimension.sizeSquared then
+            if Vector3.New(node.worldPosition - neighborNode.worldPosition).size <= node.dimension.size then
                 table.insert(nodes, neighborNode)
             end
         end
@@ -351,12 +351,12 @@ function JumpPointSearch:GetSuccessors(jumpPoint)
                     self.manager:DebugDrawNode(foundJumpPoint.node.worldPosition, node.dimension / 2, Color.CYAN, math.max(self.debugLevel - 2, 1), 3)
                 end
 
-                local d = Vector3.New(foundJumpPoint.node.worldPosition - node.worldPosition).sizeSquared
+                local d = Vector3.New(foundJumpPoint.node.worldPosition - node.worldPosition).size
                 local g = foundJumpPoint.g + d
 
                 if not foundJumpPoint.opened or g < foundJumpPoint.g then
                     foundJumpPoint.g = g
-                    foundJumpPoint.h = foundJumpPoint.h or Vector3.New(foundJumpPoint.node.worldPosition - self.endNode.worldPosition).sizeSquared
+                    foundJumpPoint.h = foundJumpPoint.h or Vector3.New(foundJumpPoint.node.worldPosition - self.endNode.worldPosition).size
                     foundJumpPoint.f = foundJumpPoint.g + foundJumpPoint.h
                     foundJumpPoint.parent = jumpPoint
 

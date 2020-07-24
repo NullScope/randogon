@@ -84,7 +84,7 @@ Assets {
           Rotation {
           }
           Scale {
-            X: 2
+            X: 1.99
             Y: 3
             Z: 1
           }
@@ -132,7 +132,7 @@ Assets {
             Yaw: 89.9999847
           }
           Scale {
-            X: 2
+            X: 1.99
             Y: 3
             Z: 1
           }
@@ -180,7 +180,7 @@ Assets {
             Yaw: 89.9999542
           }
           Scale {
-            X: 2
+            X: 1.99
             Y: 3
             Z: 1
           }
@@ -227,7 +227,7 @@ Assets {
           Rotation {
           }
           Scale {
-            X: 2
+            X: 1.99
             Y: 3
             Z: 1
           }
@@ -387,6 +387,7 @@ Assets {
             Id: 14588733667051632999
           }
           Teams {
+            TeamInt: 101
             IsTeamCollisionEnabled: true
             IsEnemyCollisionEnabled: true
           }
@@ -435,6 +436,7 @@ Assets {
             Id: 14588733667051632999
           }
           Teams {
+            TeamInt: 101
             IsTeamCollisionEnabled: true
             IsEnemyCollisionEnabled: true
           }
@@ -482,6 +484,7 @@ Assets {
             Id: 14588733667051632999
           }
           Teams {
+            TeamInt: 101
             IsTeamCollisionEnabled: true
             IsEnemyCollisionEnabled: true
           }
@@ -530,6 +533,7 @@ Assets {
             Id: 14588733667051632999
           }
           Teams {
+            TeamInt: 101
             IsTeamCollisionEnabled: true
             IsEnemyCollisionEnabled: true
           }

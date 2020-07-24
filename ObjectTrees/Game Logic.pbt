@@ -116,7 +116,7 @@ Objects {
     }
     Overrides {
       Name: "cs:DebugConnections"
-      Bool: false
+      Bool: true
     }
     Overrides {
       Name: "cs:DebugExtremities"

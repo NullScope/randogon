@@ -341,6 +341,15 @@ Objects {
         }
       }
     }
+    ParameterOverrideMap {
+      key: 15247230168521118443
+      value {
+        Overrides {
+          Name: "cs:Debug"
+          Bool: false
+        }
+      }
+    }
     TemplateAsset {
       Id: 2453374962958382972
     }
@@ -388,6 +397,7 @@ Objects {
         Overrides {
           Name: "Rotation"
           Rotator {
+            Yaw: 90
           }
         }
         Overrides {
@@ -455,7 +465,6 @@ Objects {
         Overrides {
           Name: "Rotation"
           Rotator {
-            Yaw: 89.9999619
           }
         }
       }
@@ -490,6 +499,15 @@ Objects {
     Value: "mc:evisibilitysetting:inheritfromparent"
   }
   TemplateInstance {
+    ParameterOverrideMap {
+      key: 8359337884929636698
+      value {
+        Overrides {
+          Name: "cs:Debug"
+          Bool: false
+        }
+      }
+    }
     ParameterOverrideMap {
       key: 14114411311184692516
       value {
